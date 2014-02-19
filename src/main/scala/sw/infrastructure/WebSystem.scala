@@ -65,7 +65,7 @@ class WebActor extends Actor with ActorLogging {
       sender ! HttpResponse(entity = HttpEntity(`application/javascript`, mainjs))
 
     case msg@HttpRequest(POST, Uri.Path("/api"), _, _, _) => {
-      println(msg.headers.toString)
+      //println(msg.headers.toString)
       if (workers.size > 0) {
         jobCounter += 1
         val worker: ActorRef = workers(jobCounter % workers.size).actorRef

@@ -29,18 +29,35 @@ object Responser {
       }
 
 
+      case Some("getFilms") => {
+
+        DBs("saas")
+          .sendQuery("SELECT code, title, did, date_prod, kind, len FROM FILMS")
+          .asListOf[Film]
+          .map {
+          f =>
+            val films = f.toString
+            s"""
+                  {
+                     "result": "$films"
+                  }
+                """
+        }
+      }
+
+
       case Some("sql") => {
         (json \ "sql").asOpt[String] match {
           case Some(sql) => {
             DBs("saas")
               .sendQuery(sql)
-              .asListOf[Film]
+              .asListOf[Any]
               .map {
-              f =>
-                val films = f.toString
+              v =>
+                val any = v.toString
                 s"""
                   {
-                     "result": "$films"
+                     "result": "$any"
                   }
                 """
             }
