@@ -1,0 +1,73 @@
+<html>
+<head>
+    <title>SockJS Test</title>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//cdn.sockjs.org/sockjs-0.3.4.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/rxjs/2.2.10/rx.lite.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="TodoCtrl">
+    {{foo}}
+
+
+    <form onsubmit="return false;">
+        <div>
+            <textarea rows="10" cols="45" name="request"></textarea>
+            <textarea id="response" rows="10" cols="45" name="response"></textarea>
+        </div>
+        <div>
+            <input type="button" value="Send SockJS data"
+                   onclick="socket.sendIfOpen(this.form.request.value)"/>
+            <input type="button" value="Send ajax data"
+                   onclick="ajaxsend(this.form.request.value)"/>
+        </div>
+    </form>
+    <div style="">
+        <p>Send simple request</p>
+
+        <p>{
+            "method": "simpleRequest"
+            }
+        </p>
+
+        <p>SQL request</p>
+
+        <p>{
+            "method": "sql",
+            "sql":"SELECT code, title, did, date_prod, kind, len FROM FILMS"
+            }
+        </p>
+
+        <p>Stream response</p>
+
+        <p>{
+            "method": "stream",
+            "streamid":"qweasdzxc"
+            }
+        </p>
+
+        <p>Send broadcast</p>
+
+        <p>{
+            "method": "broadcast",
+            "message": {
+            "message": "This is broadcast message"
+            }
+            }
+        </p>
+    </div>
+
+</div>
+
+
+<script src="main.js"></script>
+
+<script>
+
+
+</script>
+
+</body>
+</html>

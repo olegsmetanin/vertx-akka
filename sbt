@@ -22,6 +22,9 @@ fi
 
 test -f ~/.sbtconfig && . ~/.sbtconfig
 
+# to debug uncomment this
+#export JAVA_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005"
+
 java -ea                          \
   $SBT_OPTS                       \
   $JAVA_OPTS                      \
@@ -40,3 +43,4 @@ java -ea                          \
   -Xmx1G                          \
   -server                         \
   -jar $sbtjar "$@"
+
